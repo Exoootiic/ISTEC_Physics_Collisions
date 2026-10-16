@@ -2,6 +2,7 @@
 
 [ext_resource type="MeshLibrary" uid="uid://b28hov8h1n3hk" path="res://assets/tiles.tres" id="1_5gf0t"]
 [ext_resource type="PackedScene" uid="uid://ow347v615xgj" path="res://assets/scenes/ball.tscn" id="2_cb5na"]
+[ext_resource type="Script" uid="uid://x76b54icyfbu" path="res://assets/scripts/camera_follow.gd" id="2_j62u1"]
 [ext_resource type="Script" uid="uid://bmw848pehlvux" path="res://assets/scripts/ball.gd" id="3_j62u1"]
 
 [node name="Game" type="Node3D" unique_id=559845273]
@@ -18,10 +19,15 @@ data = {
 "cells": PackedInt32Array(2, 65535, 15, 2, 65534, 14, 2, 65533, 1048599, 1, 65533, 1441799, 0, 65533, 1441825, 65535, 65533, 1441840, 65535, 65532, 655369, 65535, 65531, 655365, 65535, 65530, 655387)
 }
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1750138632]
-transform = Transform3D(1, 0, 0, 0, 0.7428349, 0.66947466, 0, -0.66947466, 0.7428349, 2.1700435, 2.3765213, 0.6075896)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1750138632 node_paths=PackedStringArray("ball")]
+transform = Transform3D(1, 0, 0, 0, 0.7428349, 0.66947466, 0, -0.66947466, 0.7428349, 2.3009906, 1.1339281, 0.6075896)
 fov = 74.3
+script = ExtResource("2_j62u1")
+offset = Vector3(0, 1, 1)
+ball = NodePath("../Ball")
 
-[node name="Ball" parent="." unique_id=1591421866 instance=ExtResource("2_cb5na")]
+[node name="Ball" parent="." unique_id=1591421866 node_paths=PackedStringArray("camera") instance=ExtResource("2_cb5na")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5182834, 0.12101963, -0.3153781)
+mass = 3.0
 script = ExtResource("3_j62u1")
+camera = NodePath("../Camera3D")
